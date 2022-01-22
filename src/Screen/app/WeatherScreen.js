@@ -1,5 +1,6 @@
 import React from 'react';
-import SearchPage from './SearchPage';
+import SearchPage from '../../components/weather/SearchPage';
+
 import '../../styles/weather.css';
 
 
@@ -8,7 +9,7 @@ import '../../index.css';
 import '../../styles/adaptiveApp.css';
 
 
-const Weather = () => { 
+const WeatherScreen = () => { 
 
   return (
  
@@ -19,8 +20,4 @@ const Weather = () => {
 
 
 
-export default Weather;
-
-
-
-
+export default WeatherScreen;

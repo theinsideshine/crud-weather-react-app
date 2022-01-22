@@ -1,8 +1,5 @@
 import React from 'react';
 import CitySearch from './CitySearch';
-import ListButton from '../UI/ListButton';
-
-
 
 
 const SearchPage = (props) => {

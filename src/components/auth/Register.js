@@ -1,4 +1,7 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import validator from 'validator';
+
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,12 +16,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Su sitio web
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,20 +33,61 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const   SignUp= () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+const   Register= () => {
+
+  
+  
+  const [ name, setName] = useState('Hernando!');
+  const [ surname, setSurName] = useState('Hijus');
+  const [ email, setEmail] = useState('nando@gmail.com');
+  const [ password, setPassword] = useState('123456');
+
+ 
+
+
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+   
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+    console.log(name,surname,email,password);
+
+    if ( isFormValid () ) {
+    
+      console.log('Formulario correcto.');
+      
+    }
+  }
+
+    const isFormValid = () => {
+
+     // Los objetos no tienen la propiedad lenght
+       
+      
+     
+      if ( !validator.isEmail ( email) ){
+
+        console.log('El correo no es valido');
+        return false;
+      }
+
+      if ( password.length < 5 ){
+        console.log('La contraseña debe tener min 6 caracteres')
+        return false;
+      }
+    
+
+      return true;
+    }
+
+
+
+
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" > 
         <CssBaseline />
         <Box
           sx={{
@@ -55,29 +101,36 @@ const   SignUp= () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Registrar
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form"  onSubmit={ handleRegister } sx={{ mt: 3 }}>
             <Grid container spacing={2}>
+
+              
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="name"
+                  label="Nombre"
                   autoFocus
+                  value={ name }
+                  onChange={(e) => setName(e.target.value)}
+                  
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
+                  id="surName"
+                  label="Apellido"
+                  name="surname"
                   autoComplete="family-name"
+                  value={ surname }
+                  onChange={(e) => setSurName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -85,9 +138,12 @@ const   SignUp= () => {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Correo Electronico"
                   name="email"
                   autoComplete="email"
+                  value={ email }
+                  onChange={(e) => setEmail(e.target.value)}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -95,16 +151,18 @@ const   SignUp= () => {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Contraseña"
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={ password }
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="Quiero recibir inspiración, promociones de marketing y actualizaciones por correo electrónico."
                 />
               </Grid>
             </Grid>
@@ -114,12 +172,12 @@ const   SignUp= () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Registrar
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                  Ya tiene una cuenta? Entrar
                 </Link>
               </Grid>
             </Grid>
@@ -132,4 +190,4 @@ const   SignUp= () => {
 
  
 }
-export default SignUp;
+export default Register;
