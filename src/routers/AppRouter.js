@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -9,7 +9,18 @@ import {
 import WeatherScreen from '../Screen/app/WeatherScreen';
 import AuthRouter from '../routers/AuthRouter';
 
+
+
+
 const AppRouter = () => {
+
+    useEffect ( () => {
+
+        console.log ('Paso por AppRouter');
+       
+       
+       },[])
+       
   return (
             <Router>
                 <div>

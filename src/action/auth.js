@@ -2,15 +2,9 @@
 import { types } from '../types/types';
 
 
-
-export const startLogin = ( email, password ) => {
-
-        return ( dispatch ) => {
-                setTimeout ( () => {
-                        dispatch ( login( email,password) );
-                },3500)
-        }
-}
+        /*
+        *    Se encarga de registrase en el servidor
+        */
 
 export const startRegisterEmailPassword = ( email, password, name, surname ) => async dispatch => {
 
@@ -31,22 +25,54 @@ export const startRegisterEmailPassword = ( email, password, name, surname ) => 
                         
                 })
             });
-        console.log(response);
+            const data = await response.json();
+            console.log(data);
         if (response.status === 200) {
-                
-                dispatch ( login( email,password) );
+                console.log('Registro ok.');
+               
         }else {
-                console.log('error');
+                console.log('Register error');
+        }
+}
+
+/*
+*    Se encarga de loggearse en el servidor, 
+*/
+
+export const startLogin = ( email, password) => async dispatch => {
+
+        console.log (email, password);
+        const response = await fetch('http://localhost:8080/api/login', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body:JSON.stringify( {
+
+                        email: email,
+                        password: password       
+                        
+                })
+            });
+            const data = await response.json();
+            console.log(data);
+        if (response.status === 200) {
+                console.log('Login ok.');                
+                dispatch ( login( email, password, data.token) ); 
+        }else {
+                console.log('Login error');
         }
 }
 
 
-export const login = ( uid, displayName ) => ({ // return
+
+export const login = ( uid, name, token ) => ({ // return
 
         type: types.login,
         payload: {
             uid,
-           displayName
+           name,
+           token
         }
 
 })

@@ -61,11 +61,7 @@ const Login = () => {
   };
 
   
-  const isFormValid = () => {
-
-    // Los objetos no tienen la propiedad lenght
-      
-     
+  const isFormValid = () => {    
     
      if ( !validator.isEmail ( email) ){
 
@@ -136,17 +132,17 @@ const Login = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Entrar
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Olvido su contraseña?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="" variant="body2">
+                  {"No tiene una cuenta? Registrese"}
                 </Link>
               </Grid>
             </Grid>
@@ -159,3 +155,5 @@ const Login = () => {
 }
 
 export default Login;
+
+//https://jasonwatmore.com/post/2017/12/07/react-redux-jwt-authentication-tutorial-example
