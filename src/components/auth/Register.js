@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import validator from 'validator';
+
+import { Link } from 'react-router-dom';
+
+import { setError, removeError } from '../../action/ui';
+import { ErrorForm } from '../errorForm/errorForm';
 
 
 import Avatar from '@mui/material/Avatar';
@@ -9,7 +14,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -21,31 +26,20 @@ import {startRegisterEmailPassword } from '../../action/auth';
 
 
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Su sitio web
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
 const   Register= () => {
 
 
-  const dispatch = useDispatch ();  
+  const dispatch = useDispatch ();   
+  const { msgError } = useSelector ( state => state.ui  );
+   
   
   const [ name, setName] = useState('Hernando!');
   const [ surname, setSurName] = useState('Hijus');
   const [ email, setEmail] = useState('nando@gmail.com');
   const [ password, setPassword] = useState('123456');
-
  
 
 
@@ -68,22 +62,21 @@ const   Register= () => {
 
     const isFormValid = () => {
 
-     // Los objetos no tienen la propiedad lenght
-       
+     
       
      
       if ( !validator.isEmail ( email) ){
 
-        console.log('El correo no es valido');
+        dispatch ( setError('El mail es incorrecto'));
         return false;
       }
 
       if ( password.length < 5 ){
-        console.log('La contraseña debe tener min 6 caracteres')
+        dispatch ( setError('La contraseña debe tener min 6 caracteres'));
         return false;
       }
     
-
+      dispatch ( removeError());
       return true;
     }
 
@@ -109,6 +102,7 @@ const   Register= () => {
           <Typography component="h1" variant="h5">
             Registrar
           </Typography>
+          { ErrorForm ( msgError )}
           <Box component="form"  onSubmit={ handleRegister } sx={{ mt: 3 }}>
             <Grid container spacing={2}>
 
@@ -182,14 +176,14 @@ const   Register= () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/auth/login" variant="body2">
                   Ya tiene una cuenta? Entrar
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        
       </Container>
     </ThemeProvider>
   );

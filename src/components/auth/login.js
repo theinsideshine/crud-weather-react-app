@@ -1,8 +1,13 @@
 import React , { useState } from 'react';
 import validator from 'validator';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { startLogin } from '../../action/auth';
+import { setError, removeError } from '../../action/ui';
+import { ErrorForm } from '../errorForm/errorForm';
+
+
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -10,7 +15,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -20,25 +25,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 const Login = () => {
 
 
   const dispatch = useDispatch ();
+  const { msgError } = useSelector ( state => state.ui  );
 
   
   const [ email, setEmail] = useState('nando@gmail.com');
@@ -65,16 +58,16 @@ const Login = () => {
     
      if ( !validator.isEmail ( email) ){
 
-       console.log('El correo no es valido');
+       dispatch ( setError('El mail es incorrecto'));
        return false;
      }
 
      if ( password.length < 5 ){
-       console.log('La contraseña debe tener min 6 caracteres')
+      dispatch ( setError('La contraseña debe tener min 6 caracteres'));
        return false;
      }
    
-
+     dispatch ( removeError());
      return true;
    }
 
@@ -97,6 +90,7 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          { ErrorForm ( msgError )}
           <Box component="form" onSubmit={handleLogin}  sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -106,7 +100,7 @@ const Login = () => {
               label="Correo electronico"
               name="email"
               autoComplete="email"
-              autoFocus
+              autoFocus              
               value={ email }
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -136,19 +130,19 @@ const Login = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link to="" variant="body2">
                   Olvido su contraseña?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="" variant="body2">
+                <Link to="/auth/register" variant="body2">
                   {"No tiene una cuenta? Registrese"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+       
       </Container>
     </ThemeProvider>
   );
