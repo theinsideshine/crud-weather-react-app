@@ -33,7 +33,7 @@ const   Register= () => {
 
 
   const dispatch = useDispatch ();   
-  const { msgError } = useSelector ( state => state.ui  );
+  const { msgError , loading } = useSelector ( state => state.ui  );
    
   
   const [ name, setName] = useState('Hernando!');
@@ -167,6 +167,7 @@ const   Register= () => {
               </Grid>
             </Grid>
             <Button
+              disabled = {loading}
               type="submit"
               fullWidth
               variant="contained"

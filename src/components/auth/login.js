@@ -31,9 +31,9 @@ const Login = () => {
 
 
   const dispatch = useDispatch ();
-  const { msgError } = useSelector ( state => state.ui  );
+  const { msgError , loading } = useSelector ( state => state.ui  );
 
-  
+  console.log( 'loading: ',loading); 
   const [ email, setEmail] = useState('nando@gmail.com');
   const [ password, setPassword] = useState('123456');
 
@@ -121,6 +121,7 @@ const Login = () => {
               label="Remember me"
             />
             <Button
+              disabled = {loading}
               type="submit"
               fullWidth
               variant="contained"

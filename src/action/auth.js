@@ -1,6 +1,8 @@
 
 import { types } from '../types/types';
 import auth from '../components/auth/LocalStorage';
+import { finishLoading, startLoading } from './ui';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -12,6 +14,7 @@ import auth from '../components/auth/LocalStorage';
 export const startRegisterEmailPassword = ( email, password, name, surname ) => async dispatch => {
 
         console.log (email, password, name, surname );
+        dispatch (startLoading());
         const response = await fetch('http://localhost:8080/api/users/register', {
                 method: 'POST',
                 headers: {
@@ -32,9 +35,12 @@ export const startRegisterEmailPassword = ( email, password, name, surname ) => 
             console.log(data);
         if (response.status === 200) {
                 console.log('Registro ok.');
+                dispatch (finishLoading());
+        
                
         }else {
                 console.log('Register error');
+                dispatch (finishLoading());
         }
 }
 
@@ -45,6 +51,7 @@ export const startRegisterEmailPassword = ( email, password, name, surname ) => 
 export const startLogin = ( email, password) => async dispatch => {
 
         console.log (email, password);
+        dispatch (startLoading());
         const response = await fetch('http://localhost:8080/api/login', {
                 method: 'POST',
                 headers: {
@@ -60,11 +67,13 @@ export const startLogin = ( email, password) => async dispatch => {
             const data = await response.json();
             console.log(data);
         if (response.status === 200) {
+                dispatch (finishLoading());
                 console.log('Login ok.');                
                 dispatch ( login( email, data.name, data.token) ); 
                 auth.setAll( email, data.name, data.token); 
         }else {
                 console.log('Login error');
+                dispatch (finishLoading());
         }
 }
 
