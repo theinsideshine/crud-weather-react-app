@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 //import SignIn from './components/auth/SignIn';
 //import SignUp from './components/auth/SignUp';
@@ -8,5 +10,9 @@ import * as React from 'react';
 import AppRouter from './routers/AppRouter';
 
 export default function App() {
-  return <AppRouter />;
-}
+  return(
+        <Provider store={ store }>
+              <AppRouter />
+          </Provider>
+       )
+  }

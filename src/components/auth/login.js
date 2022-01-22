@@ -1,4 +1,9 @@
-import * as React from 'react';
+import React , { useState } from 'react';
+import validator from 'validator';
+import { useDispatch } from 'react-redux';
+
+import { startLogin } from '../../action/auth';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +17,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
 
 function Copyright(props) {
   return (
@@ -28,16 +35,53 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const Login= () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+const Login = () => {
+
+
+  const dispatch = useDispatch ();
+
+  
+  const [ email, setEmail] = useState('nando@gmail.com');
+  const [ password, setPassword] = useState('123456');
+
+  const handleLogin = (event) => {
+
+    event.preventDefault();   
+   
+    console.log( email, password);
+
+    if ( isFormValid () ) {
+    
+      console.log('Formulario correcto.');
+      
+      dispatch( startLogin ( email , password ));
+      
+    }
+
   };
+
+  
+  const isFormValid = () => {
+
+    // Los objetos no tienen la propiedad lenght
+      
+     
+    
+     if ( !validator.isEmail ( email) ){
+
+       console.log('El correo no es valido');
+       return false;
+     }
+
+     if ( password.length < 5 ){
+       console.log('La contraseña debe tener min 6 caracteres')
+       return false;
+     }
+   
+
+     return true;
+   }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -57,16 +101,18 @@ const Login= () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleLogin}  sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Correo electronico"
               name="email"
               autoComplete="email"
               autoFocus
+              value={ email }
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -77,6 +123,8 @@ const Login= () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={ password }
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

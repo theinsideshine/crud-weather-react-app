@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import validator from 'validator';
 
 
@@ -15,6 +16,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import {startRegisterEmailPassword } from '../../action/auth';
 
 
 
@@ -35,7 +38,8 @@ const theme = createTheme();
 
 const   Register= () => {
 
-  
+
+  const dispatch = useDispatch ();  
   
   const [ name, setName] = useState('Hernando!');
   const [ surname, setSurName] = useState('Hijus');
@@ -49,13 +53,15 @@ const   Register= () => {
   const handleRegister = (e) => {
     e.preventDefault();
    
-    // eslint-disable-next-line no-console
+   
 
     console.log(name,surname,email,password);
 
     if ( isFormValid () ) {
     
       console.log('Formulario correcto.');
+
+      dispatch( startRegisterEmailPassword ( email, password, name, surname ));
       
     }
   }
