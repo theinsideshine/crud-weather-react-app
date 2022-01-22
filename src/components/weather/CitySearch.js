@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+
 
 import '../../styles/CitySearch.css'
 import Weather from './weather';
@@ -15,11 +15,7 @@ const CitySearch = (props) => {
     const [city, setCity] = useState("");              // Ciudad a buscar.
     const [findCity, setFindCity] =  useState(false);  // Busqueda valida en city.      
     const [weather, setweather] = useState({});   // Datos del clima
-    const [error, setError] = useState(true);        // Datos del clima validos
-
-    
-
-     
+    const [error, setError] = useState(true);        // Datos del clima validos    
 
      
              
@@ -115,24 +111,3 @@ const CitySearch = (props) => {
 
 export default CitySearch;
 
-/*
-<Input
-                type='text'
-                minWidth='100'
-                inputStyle={{fontSize: 35, fontWeight: 600, display: 'block'}}
-                value={inputValue}
-                onChange={function(event) {
-                    setInput(event.target.value) 
-                  }}
-
-                   { error ? <div sx={{ display: { xs: 'none', md: 'block' }}}>
-                                              no hay resultados
-                                         </div>
-                                        : 
-                                        <div sx={{ display: { xs: 'none', md: 'block' }}}>
-                                            {weatherData.temp}
-                                        </div>  
-                                }
-                         
-               
-            />*/
