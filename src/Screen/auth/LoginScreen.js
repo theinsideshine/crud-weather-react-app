@@ -30,15 +30,15 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-const LoginScreen = ( ) => {
+const LoginScreen = (  ) => {
 
 
   const dispatch = useDispatch ();
   const { msgError , loading } = useSelector ( state => state.ui  ); 
 
-  console.log( 'loading: ',loading); 
-  const [ email, setEmail] = useState('nando@gmail.com');
-  const [ password, setPassword] = useState('123456');
+  //console.log( 'loading: ',loading); 
+  const [ email, setEmail] = useState('');
+  const [ password, setPassword] = useState('');
 
   
 
@@ -46,11 +46,11 @@ const LoginScreen = ( ) => {
 
     event.preventDefault();   
    
-    console.log( email, password);
+    //console.log( email, password);
 
     if ( isFormValid () ) {
     
-      console.log('Formulario correcto.');
+     // console.log('Formulario correcto.');
       
       dispatch( startLogin ( email , password ));
 
@@ -99,7 +99,7 @@ const LoginScreen = ( ) => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Entrar
             </Typography>
             { ErrorForm ( msgError )}
             <Box component="form" onSubmit={handleLogin}  sx={{ mt: 1 }}>

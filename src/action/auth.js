@@ -1,47 +1,36 @@
 
 import { types } from '../types/types';
-import auth from '../components/auth/LocalStorage';
 import { finishLoading, startLoading } from './ui';
-
-
-
-
-
+import { fetchSinToken } from '../helpers/fetch';
         /*
         *    Se encarga de registrase en el servidor
         */
 
-export const startRegisterEmailPassword = ( email, password, name, surname ) => async dispatch => {
-
+export const startRegister = ( email, password, name, surname ) =>  {
        
-        console.log (email, password, name, surname );
-        dispatch (startLoading());
-        const response = await fetch('http://localhost:8080/api/users/register', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body:JSON.stringify( {
+        return async( dispatch ) => {     
 
-                        email: email,
-                        password: password,
-                        name: name,
-                        surname: surname,
-                        phone: '',
-                        msj: ''
+                //console.log (email, password);
+                dispatch (startLoading());    // Control de loadind del login
+
+                const resp = await fetchSinToken( '/users/register', { email, password,name,surname }, 'POST' );
+                const body = await resp.json();
+               // console.log (body);
+
+                if (body.result === 'OK') {
+
+                 dispatch (finishLoading());
+                 console.log('register ok');
                         
-                })
-            });
-            const data = await response.json();
-            console.log(data);
-        if (response.status === 200) {
-                console.log('Registro ok.');
-                dispatch (finishLoading());
-        
-               
-        }else {
-                console.log('Register error');
-                dispatch (finishLoading());
+               // Hay que modificar el back para que soporte re-autenticacion asi puede logearse
+
+                }else {
+
+                console.log('register error');
+                 dispatch (finishLoading());
+
+                }
+
         }
 }
 
@@ -49,35 +38,41 @@ export const startRegisterEmailPassword = ( email, password, name, surname ) => 
 *    Se encarga de loggearse en el servidor, 
 */
 
-export const startLogin = ( email, password) => async dispatch => {
+export const startLogin = ( email, password)  => {
         
-       
+        return async( dispatch ) => {     
 
-        console.log (email, password);
-        dispatch (startLoading());
-        const response = await fetch('http://localhost:8080/api/login', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body:JSON.stringify( {
+                //console.log (email, password);
+                dispatch (startLoading());    // Control de loadind del login
 
-                        email: email,
-                        password: password       
+                const resp = await fetchSinToken( '/login', { email, password }, 'POST' );
+                const body = await resp.json();
+               // console.log (body);
+
+                if (body.result === 'OK') {
+
+                 dispatch (finishLoading());
+                 console.log('Login ok');
+
+                 // Hay que modificar el back para que soporte re-autenticacion 
+
+                localStorage.setItem('token', body.token );
+                localStorage.setItem('token-init-date', new Date().getTime() ) ; 
+                localStorage.setItem('uid', email );
+                localStorage.setItem('name', body.name );
+
+                dispatch( login({
+                        uid :email,
+                        name: body.name
+                }) )               
                         
-                })
-            });
-            const data = await response.json();
-            console.log(data);
-        if (response.status === 200) {
-                dispatch (finishLoading());
-                console.log('Login ok.');                
-                dispatch ( login( email, data.name, data.token) ); 
-                auth.setAll( email, data.name, data.token); 
-                
-        }else {
+                }else {
+
                 console.log('Login error');
-                dispatch (finishLoading());
+                 dispatch (finishLoading());
+
+                }
+
         }
 }
 

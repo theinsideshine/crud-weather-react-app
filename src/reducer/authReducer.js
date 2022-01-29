@@ -1,15 +1,11 @@
-import { types } from "../../types/types";
-
+import { types } from '../types/types';
 
 const initialState = {
-    uid : 123123 ,
-    name: 'Fernando',
-    token: 'adsdadadl22411'
-    
+    checking: true,
+     //uid : null ,
+     //name: null
+      
 }
-
-
-
 
 export const authReducer = ( state = { initialState }, action ) => {
 
@@ -17,9 +13,9 @@ export const authReducer = ( state = { initialState }, action ) => {
     switch (action.type) {
         case types.login:
             return {
-                uid: action.payload.uid,
-                name: action.payload.name,
-                token: action.payload.token
+                ...state,
+                ...action.payload,
+                checking: false
             }
 
         case types.logout:
