@@ -12,6 +12,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
 import { WeatherScreen }  from '../Screen/app/WeatherScreen';
+import { CrudScreen }  from '../Screen/app/CrudScreen';
 
 import { login } from '../action/auth';
 
@@ -66,6 +67,13 @@ export const AppRouter = () => {
                             isAuthenticated={ !!uid }
                             path="/"
                             component={ WeatherScreen }
+                        />
+
+<PrivateRoute
+                            exact
+                            isAuthenticated={ !!uid }
+                            path="/crud"
+                            component={ CrudScreen }
                         />
     |                   
                         <Redirect to ="/auth/login" />          
