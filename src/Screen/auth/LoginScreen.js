@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link  } from 'react-router-dom';
 
 
-import { startLogin } from '../../action/auth';
+import { login } from '../../action/auth'; // forzar auth
 import { setError, removeError } from '../../action/ui';
 import { ErrorForm } from '../../components/errorForm/errorForm';
 
@@ -50,12 +50,16 @@ const LoginScreen = (  ) => {
 
     if ( isFormValid () ) {
     
-     // console.log('Formulario correcto.');
+    
       
-      dispatch( startLogin ( email , password ));
-
-      
-      
+     // dispatch( startLogin ( email , password )); forzar auth
+     dispatch( login({
+      uid :email,
+      name: 'jose'
+    }) )
+ 
+    localStorage.setItem('uid', email );
+    localStorage.setItem('name','jose' );
     
       
       
