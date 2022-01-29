@@ -78,19 +78,6 @@ const useStyles = makeStyles((theme) => ({
       surname: 'Tavolaro Ortiz',
       phone: '15-4545-8978',
       msj: 'Pink'
-    },
-    {
-      id: 6,
-      name: 'Anabel Natalia',
-      surname: 'Reta',
-      phone: '15-4571-0008',
-      msj: 'Black'
-    }, {
-      id: 7,
-      name: 'Anabel Natalia',
-      surname: 'Reta',
-      phone: '15-4571-0008',
-      msj: 'Black'
     }
 
   ];
