@@ -2,7 +2,7 @@
 import { types } from '../types/types';
 import auth from '../components/auth/LocalStorage';
 import { finishLoading, startLoading } from './ui';
-import { Redirect } from 'react-router-dom';
+
 
 
 
@@ -13,6 +13,7 @@ import { Redirect } from 'react-router-dom';
 
 export const startRegisterEmailPassword = ( email, password, name, surname ) => async dispatch => {
 
+       
         console.log (email, password, name, surname );
         dispatch (startLoading());
         const response = await fetch('http://localhost:8080/api/users/register', {
@@ -49,6 +50,8 @@ export const startRegisterEmailPassword = ( email, password, name, surname ) => 
 */
 
 export const startLogin = ( email, password) => async dispatch => {
+        
+       
 
         console.log (email, password);
         dispatch (startLoading());
@@ -71,6 +74,7 @@ export const startLogin = ( email, password) => async dispatch => {
                 console.log('Login ok.');                
                 dispatch ( login( email, data.name, data.token) ); 
                 auth.setAll( email, data.name, data.token); 
+                
         }else {
                 console.log('Login error');
                 dispatch (finishLoading());

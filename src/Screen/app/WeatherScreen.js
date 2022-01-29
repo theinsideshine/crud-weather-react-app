@@ -9,7 +9,7 @@ import '../../index.css';
 import '../../styles/adaptiveApp.css';
 
 
-const WeatherScreen = () => { 
+export const WeatherScreen = () => { 
 
   return (
  
@@ -20,4 +20,4 @@ const WeatherScreen = () => {
 
 
 
-export default WeatherScreen;
+ 

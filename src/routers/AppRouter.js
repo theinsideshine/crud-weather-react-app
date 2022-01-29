@@ -1,41 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
+    Switch,    
     Redirect,
   } from "react-router-dom";
 
-import WeatherScreen from '../Screen/app/WeatherScreen';
-import AuthRouter from '../routers/AuthRouter';
+import { useDispatch, useSelector } from 'react-redux';
+  
+import { AuthRouter } from './AuthRouter';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+
+import { WeatherScreen }  from '../Screen/app/WeatherScreen';
+
 import auth from '../components/auth/LocalStorage';
 import { login } from '../action/auth';
 
-
-
-const AppRouter = () => {
-
+export const AppRouter = () => {
    
-    const dispatch = useDispatch();
-    
+    const dispatch = useDispatch();    
     const [ checking, setCheking ] = useState (true);
     const [ isLoggedIn, setIsLoggedIn ] = useState (false);
+    const { uid } = useSelector( state => state.auth)
 
     useEffect ( () => {
      
-        
-        console.log('paso por ApprRouter');
-        if ( auth.getUid() === null ) {
-            console.log('No hay usuario logeado.');
-            setIsLoggedIn(false);
+        if (!!uid){
+            console.log('esta logeado');
+            dispatch (login ( auth.getUid, auth.getName,  auth.getToken));
         }else {
-           dispatch ( login( auth.getUid(), auth.getName(), auth.getToken()) );
-           setIsLoggedIn(true);
+            console.log('No esta logeado');
         }
-        setCheking(false);
-           
-       },[dispatch,setCheking])
+            setCheking(false);
+    },[uid,dispatch])  
 
        if ( checking ) {
             return ( 
@@ -48,13 +45,15 @@ const AppRouter = () => {
             <Router>
                 <div>
                     <Switch>
-                        <Route
-                            path="/auth"
+                        <PublicRoute
+                            isAuthenticated={ !!uid }
+                            path="/auth"                            
                             component={ AuthRouter }
                         />
 
-                        <Route
+                        <PrivateRoute
                             exact
+                            isAuthenticated={ !!uid }
                             path="/"
                             component={ WeatherScreen }
                         />
@@ -62,11 +61,8 @@ const AppRouter = () => {
                         <Redirect to ="/auth/login" />          
 
                     </Switch>
-
-                </div>
-      
+                </div>       
            </Router>
         )
-};
+}
 
-export default AppRouter;
