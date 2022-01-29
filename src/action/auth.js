@@ -89,3 +89,7 @@ export const login = ( uid, name, token ) => ({ // return
         
 })
 
+export  const logout = () => ({
+
+        type: types.logout
+    })
