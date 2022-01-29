@@ -1,9 +1,23 @@
-import React, {useEffect, useState} from 'react';
-//import '../../App.css';
+import React, { useState } from 'react';
+
 
 import {makeStyles} from '@material-ui/core/styles';
 import {Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField}  from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
+import { tableCellClasses } from '@mui/material/TableCell';
+import { styled } from '@mui/material/styles';
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  }
+}));
+
 
 
 
@@ -25,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   inputMaterial:{
     width: '100%'
   }
+ 
 }));
   
 
@@ -42,7 +57,42 @@ const useStyles = makeStyles((theme) => ({
       surname: 'Reta',
       phone: '15-4571-0008',
       msj: 'Black'
+    },
+    {
+      id: 3,
+      name: 'Pablo Oscar',
+      surname: 'Tavolaro Ortiz',
+      phone: '15-4545-8978',
+      msj: 'Pink'
+    },
+    {
+      id: 4,
+      name: 'Anabel Natalia',
+      surname: 'Reta',
+      phone: '15-4571-0008',
+      msj: 'Black'
+    },
+    {
+      id: 5,
+      name: 'Pablo Oscar',
+      surname: 'Tavolaro Ortiz',
+      phone: '15-4545-8978',
+      msj: 'Pink'
+    },
+    {
+      id: 6,
+      name: 'Anabel Natalia',
+      surname: 'Reta',
+      phone: '15-4571-0008',
+      msj: 'Black'
+    }, {
+      id: 7,
+      name: 'Anabel Natalia',
+      surname: 'Reta',
+      phone: '15-4571-0008',
+      msj: 'Black'
     }
+
   ];
 
 const Crud = () => {
@@ -50,7 +100,7 @@ const Crud = () => {
   const [modalEliminar, setModalEliminar]=useState(false);
   const [modalEditar, setModalEditar]=useState(false);
 
-
+   
   const [selectConsole, setSelectConsole]=useState({
       name: '',
       surname: '',
@@ -123,50 +173,52 @@ const Crud = () => {
 
 
     return (
-        <div className="App">
         
-            <TableContainer>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Nombre</TableCell>
-                            <TableCell>Apellido</TableCell>
-                            <TableCell>Telefono</TableCell>
-                            <TableCell>Mensaje</TableCell>
-                            <TableCell>Acciones</TableCell>
-                        </TableRow>
-                    </TableHead>
+          <div className='app2'>
+          
+              <TableContainer >
+                  <Table >
+                      <TableHead >
+                          <TableRow  >
+                            <StyledTableCell>Nombre</StyledTableCell>
+                            <StyledTableCell>Apellido</StyledTableCell>
+                            <StyledTableCell>Telefono</StyledTableCell>
+                            <StyledTableCell>Mensaje</StyledTableCell>
+                            <StyledTableCell>Acciones</StyledTableCell>
+                          </TableRow>
+                      </TableHead>
 
-                    <TableBody>
-                        {user.map(console=>(
-                            <TableRow key={console.id}>
-                            <TableCell>{console.name}</TableCell>
-                            <TableCell>{console.surname}</TableCell>
-                            <TableCell>{console.phone}</TableCell>
-                            <TableCell>{console.msj}</TableCell>
-                            <TableCell>                                
-                                <Edit className={styles.iconos} onClick={()=>ConsoleSelect(console, 'Editar')}/>               
-                                &nbsp;&nbsp;&nbsp;
-                                <Delete  className={styles.iconos} onClick={()=>ConsoleSelect(console, 'Eliminar')}/>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>  
+                      <TableBody>
+                          {user.map(console=>(
+                              <TableRow key={console.id}>
+                              <TableCell>{console.name}</TableCell>
+                              <TableCell>{console.surname}</TableCell>
+                              <TableCell>{console.phone}</TableCell>
+                              <TableCell>{console.msj}</TableCell>
+                              <TableCell>                                
+                                  <Edit className={styles.iconos} onClick={()=>ConsoleSelect(console, 'Editar')}/>               
+                                  &nbsp;&nbsp;&nbsp;
+                                  <Delete  className={styles.iconos} onClick={()=>ConsoleSelect(console, 'Eliminar')}/>
+                                  </TableCell>
+                              </TableRow>
+                          ))}
+                      </TableBody>
+                  </Table>
+              </TableContainer>  
 
-            <Modal
-              open={modalEditar}
-              onClose={abrirCerrarModalEditar}>
-              {bodyEditar}
-            </Modal>
+              <Modal
+                open={modalEditar}
+                onClose={abrirCerrarModalEditar}>
+                {bodyEditar}
+              </Modal>
 
-            <Modal
-              open={modalEliminar}
-              onClose={abrirCerrarModalEliminar}>
-              {bodyEliminar}
-            </Modal> 
-        </div>
+              <Modal
+                open={modalEliminar}
+                onClose={abrirCerrarModalEliminar}>
+                {bodyEliminar}
+              </Modal> 
+          </div>
+        
   );    
 }
 

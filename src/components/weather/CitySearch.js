@@ -50,7 +50,7 @@ const CitySearch = (props) => {
     ApiCall();
     console.log(weather);
     console.log(error);
-    // eslint-disable-next-line
+    
       },[findCity]);
 
         let component;                      

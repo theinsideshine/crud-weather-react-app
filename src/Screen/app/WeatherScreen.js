@@ -12,7 +12,7 @@ import '../../styles/adaptiveApp.css';
 export const WeatherScreen = () => { 
 
   return (
-    <div>
+    <div >
       <ResponsiveAppBar/>
       <SearchPage/>
     </div>
