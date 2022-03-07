@@ -49,6 +49,7 @@ const Weather = (props) => {
         
                 const response = await fetch(url);
                 const data = await response.json(); 
+                console.log(data.weather[0].description);
                 
             
         
@@ -128,15 +129,16 @@ const Weather = (props) => {
                                 className={classes.text}
                                 variant='h5'
                                 align='center'>
-                                 Lluvia moderada
+                                 {weather.weather[0].description}
                              </Typography>
                              <br></br>
                              <br></br>
                             <Grid container spacing={2}>
                                 <Grid item xs={6}>
-                                        <WeatherIcon  code={1000} isDay={1}
+
+                                         <WeatherIcon  code={1000} isDay={1}
                                                       color={{fill: '#000'}}>
-                                         </WeatherIcon>                                     
+                                         </WeatherIcon>                                 
                                 </Grid>
     
                                 <Grid item xs={6} >
@@ -156,7 +158,8 @@ const Weather = (props) => {
                                                 variant='h5'
                                                 align='center'>                                     
                                             
-                                            {weather.wind.speed}<span>m/s</span>   {weather.main.pressure}<span>mmHg</span>  {weather.clouds.all}<span>%</span>
+                                            {weather.wind.speed}  <sub>    <span> m/s</span>  </sub> {weather.main.pressure} <sub>   <span>mmHg</span>   </sub>
+                                            {weather.clouds.all}  <sub>    <span>%</span>     </sub> 
                                     </Typography>                                  
                                 </Grid>
     
@@ -191,5 +194,8 @@ export default Weather;
 //className={classes.text}
 //sx={{ input: { color: 'white' } }}
 
-
-
+/*
+<WeatherIcon  code={1000} isDay={1}
+                                                      color={{fill: '#000'}}>
+                                         </WeatherIcon>*/
+                                        // weather.weather[0].icon

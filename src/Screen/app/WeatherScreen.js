@@ -4,6 +4,8 @@ import React from 'react';
 import { Footer } from '../../components/UI/Footer';
 import Header from '../../components/UI/Header';
 import Weather from '../../components/weather/Weather';
+import Paper from '@mui/material/Paper';
+import ImagePattern from '../../images/background-pattern.png';
 
 
 
@@ -12,11 +14,11 @@ import Weather from '../../components/weather/Weather';
 export const WeatherScreen = () => { 
 
   return (
-    <div >
+    <Paper style={{ backgroundImage: `url(${ImagePattern})`}}>
       <Header/>
       <Weather/>
       <Footer/>
-    </div>
+    </Paper>
   )
 };
 //keyofevergreen.github.io/SimpleWeather/

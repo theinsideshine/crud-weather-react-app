@@ -1,13 +1,14 @@
 import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 
 export const Copyright=() => {
     return (
       <Typography variant="body2" color="text.secondary" align="center">
+        <br></br>
+        <br></br>
         <br></br>
         <br></br>
         {'Copyright © '}
@@ -21,10 +22,8 @@ export const Copyright=() => {
   }
   export const Footer=() => {
     return (
-        <Box>        
-          <Copyright />
-        
-      </Box>
-   
-            );
+            <Box>        
+              <Copyright />        
+            </Box>  
+          );
         }   

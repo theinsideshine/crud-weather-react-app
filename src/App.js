@@ -17,9 +17,11 @@ const  theme = createTheme ({
                 } 
             
       },
-      root: {
-            backgroundColor: green
-      }
+      typography:{
+            fontFamily: [
+                  'Roboto', 'sans-serif'
+            ]
+           }
 })
 
 
