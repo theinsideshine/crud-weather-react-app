@@ -36,7 +36,13 @@ const Weather = (props) => {
     const [city, setCity] = useState("");              // Ciudad a buscar.
     const [findCity, setFindCity] =  useState(false);  // Busqueda valida en city.      
     const [weather, setweather] = useState({});   // Datos del clima
-    const [error, setError] = useState(true);        // Datos del clima validos    
+    const [error, setError] = useState(true);        // Datos del clima validos  
+    const [ icon, setIcon ] = useState(1135);        // Iconos del clima
+    const [ iconDay, setIconDay ] = useState(1);     // Condicion de dia para iconos del clima
+
+
+    
+       
 
                   
        useEffect(() => {
@@ -49,7 +55,7 @@ const Weather = (props) => {
         
                 const response = await fetch(url);
                 const data = await response.json(); 
-                console.log(data.weather[0].description);
+                console.log(data.weather[0].icon);              
                 
             
         
@@ -58,6 +64,15 @@ const Weather = (props) => {
                 if(response.status === 200) {
                     setweather(data); // Importante_Primero cargar la data para que no randeriza antes de cambiar a false error y no encuentre data.
                     setError(false);
+                    if (  data.weather[0].icon === '04d'){
+                        setIcon(1009);
+                        setIconDay(1);
+                    } 
+                    if (  data.weather[0].icon === '04n'){
+                        setIcon(1009);
+                        setIconDay(0);
+                    } 
+
                     
                 } else {
                     setError(true); 
@@ -136,7 +151,7 @@ const Weather = (props) => {
                             <Grid container spacing={2}>
                                 <Grid item xs={6}>
 
-                                         <WeatherIcon  code={1000} isDay={1}
+                                         <WeatherIcon  code={icon} isDay={iconDay}
                                                       color={{fill: '#000'}}>
                                          </WeatherIcon>                                 
                                 </Grid>
