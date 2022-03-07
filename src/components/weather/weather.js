@@ -12,18 +12,15 @@ import WeatherIcon from './WeatherIcon';
 
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) =>({
     
   tempContainer:{
       
       paddingTop: '35px',
      color: '#FFFFFF' 
     
-  },
-  text:{
-      color: '#FFFFFF',        
   }
-});
+}));
 
 
 
@@ -41,8 +38,7 @@ const Weather = (props) => {
     const [weather, setweather] = useState({});   // Datos del clima
     const [error, setError] = useState(true);        // Datos del clima validos    
 
-     
-             
+                  
        useEffect(() => {
 
             const ApiCall = async () => {
@@ -52,8 +48,7 @@ const Weather = (props) => {
                 const url = `${url_base}weather?q=${city}&units=metric&APPID=${api_key}`;
         
                 const response = await fetch(url);
-                const data = await response.json();
-        
+                const data = await response.json(); 
                 
             
         
@@ -72,8 +67,7 @@ const Weather = (props) => {
         }
 
     ApiCall();
-    //console.log(weather);
-    //console.log(error);
+  
     
       },[findCity, city]);                            
         
@@ -82,7 +76,7 @@ const Weather = (props) => {
            <>
             
     
-            <Grid container >
+            <Grid container className={classes.root} >
                 <Grid item xs={1} sm={3}>            
                 </Grid>
     
@@ -92,24 +86,25 @@ const Weather = (props) => {
                                 marginTop: 150,          
                                 height: 500,  
                                 background: 'linear-gradient(180deg,#4D5DFB,#08C8F6)',
-                                borderRadius: 10,
+                                borderRadius: 15,
                             
                             }}>
                                 <br></br>
                              <Typography 
-                                className={classes.text}
-                                variant='h4'
+                                color='textPrimary'
+                                variant='h3'
                                 align='center'>
                                  Ahora en
                              </Typography>
     
                              <Box>
                                  <Box sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center'}}>
-                                     <LocationCity sx={{ mr: 1, my: 0.5, color: 'white'}}/>
-                                     <TextField                       
-                                        id="standard-basic"
-                                        variant="standard"
-                                        label="Ingrese la ciudad"
+                                     <LocationCity sx={{ mr: 1, my: 0.5}}/>
+                                     <TextField                                             
+                                        autoComplete='off'                   
+                                        id='standard-basic'
+                                        variant='standard'
+                                        label='Ingrese la ciudad'
                                         value={city}                   
                                         onChange={(e) => setCity(e.target.value)}
                                         onKeyDown={(e) =>{
@@ -129,6 +124,7 @@ const Weather = (props) => {
                                 <>
                              <br></br>
                              <Typography 
+                                color='textPrimary'
                                 className={classes.text}
                                 variant='h5'
                                 align='center'>
@@ -139,13 +135,13 @@ const Weather = (props) => {
                             <Grid container spacing={2}>
                                 <Grid item xs={6}>
                                         <WeatherIcon  code={1000} isDay={1}
-                                                      color={{fill: '#fff'}}>
+                                                      color={{fill: '#000'}}>
                                          </WeatherIcon>                                     
                                 </Grid>
     
                                 <Grid item xs={6} >
                                     <Typography 
-                                             className={classes.tempContainer}
+                                             color='textPrimary'
                                              variant='h2'
                                              align='center'>                                    
                                    {weather.main.temp}  <sup style={{ fontSize: '35px'}}>°C</sup>
@@ -156,11 +152,11 @@ const Weather = (props) => {
                                 <Grid item xs={12} className={classes.tempContainer}>
                                 <br></br>
                                 <br></br>  
-                                    <Typography className='properties__value'
+                                    <Typography color='textPrimary'
                                                 variant='h5'
                                                 align='center'>                                     
                                             
-                                            {weather.wind.speed}<span>m/s</span>  {weather.main.pressure}<span>mm Hg</span> {weather.clouds.all}<span>%</span>
+                                            {weather.wind.speed}<span>m/s</span>   {weather.main.pressure}<span>mmHg</span>  {weather.clouds.all}<span>%</span>
                                     </Typography>                                  
                                 </Grid>
     
@@ -192,7 +188,8 @@ const Weather = (props) => {
 export default Weather;
 
 
-
+//className={classes.text}
+//sx={{ input: { color: 'white' } }}
 
 
 

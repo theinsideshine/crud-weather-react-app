@@ -140,7 +140,8 @@ const Header = props => {
                   const { menuTitle, pageURL } = menuItem;
                   return (                    
                         <Button 
-                          sx={{ my: 2, color: 'white'}}
+                        color='primary'
+                          sx={{ my: 2,}}
                           key={index}
                           onClick={() => handleClick(pageURL)}>
                           {menuTitle}
