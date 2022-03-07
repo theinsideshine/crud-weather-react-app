@@ -1,8 +1,8 @@
 import React from 'react';
 
 import SearchPage from '../../components/weather/SearchPage';
-import ResponsiveAppBar from '../../components/UI/AppBar';
 import { Footer } from '../../components/UI/Footer';
+import Header from '../../components/UI/Header';
 
 import '../../styles/weather.css';
 import '../../index.css';
@@ -14,7 +14,7 @@ export const WeatherScreen = () => {
 
   return (
     <div >
-      <ResponsiveAppBar/>
+      <Header/>
       <SearchPage/>
       <Footer/>
     </div>

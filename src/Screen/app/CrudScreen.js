@@ -1,7 +1,8 @@
 import React from 'react';
+
 import Crud from '../../components/crud/crud';
-import ResponsiveAppBar from '../../components/UI/AppBar';
 import { Footer } from '../../components/UI/Footer';
+import Header from '../../components/UI/Header';
 
 
 import '../../styles/weather.css';
@@ -12,7 +13,7 @@ export const CrudScreen = () => {
   
   return (
     <div>   
-          <ResponsiveAppBar/>
+          <Header/>
           <Crud/>
           <Footer/>      
     </div>
@@ -20,4 +21,3 @@ export const CrudScreen = () => {
 
 };
 
-//<ResponsiveAppBar/>
