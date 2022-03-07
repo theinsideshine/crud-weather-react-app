@@ -5,9 +5,6 @@ import { Footer } from '../../components/UI/Footer';
 import Header from '../../components/UI/Header';
 
 
-import '../../styles/weather.css';
-import '../../index.css';
-import '../../styles/adaptiveApp.css';
 
 export const CrudScreen = () => {
   

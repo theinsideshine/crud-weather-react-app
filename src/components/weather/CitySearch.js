@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 
 
 import '../../styles/CitySearch.css'
-import Weather from './weather';
+//import Weather from './weather';
 
 
 const CitySearch = (props) => {
@@ -48,10 +48,10 @@ const CitySearch = (props) => {
         }
 
     ApiCall();
-    console.log(weather);
-    console.log(error);
+    //console.log(weather);
+    //console.log(error);
     
-      },[findCity]);
+      },[findCity, city]);
 
         let component;                      
     
@@ -61,7 +61,7 @@ const CitySearch = (props) => {
                         no hay resultados
                     </div>
       } else {
-        component =<div  key={Weather.id}>
+        component =<div  key={weather.id}>
                          
                         <h2> Temperatura: {weather.main.temp} </h2>
                         <h2> Humedad: {weather.main.humidity} </h2> 

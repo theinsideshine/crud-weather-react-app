@@ -56,19 +56,9 @@ const Header = props => {
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
+  
 
-  const handleMenuClick = pageURL => {
-
-    if (pageURL==='/auth/login'){
-      localStorage.clear(); 
-      dispatch ( logout() );
-    }
-
-    history.push(pageURL);
-    setAnchorEl(null);
-  };
-
-  const handleButtonClick = pageURL => {
+  const handleClick = pageURL => {
     if (pageURL==='/auth/login'){
       localStorage.clear(); 
       dispatch ( logout() );
@@ -137,7 +127,7 @@ const Header = props => {
                   return (                    
                         <MenuItem 
                           key={index}
-                          onClick={() => handleMenuClick(pageURL)}>
+                          onClick={() => handleClick(pageURL)}>
                           {menuTitle}
                         </MenuItem>                    
                   );
@@ -152,7 +142,7 @@ const Header = props => {
                         <Button 
                           sx={{ my: 2, color: 'white'}}
                           key={index}
-                          onClick={() => handleButtonClick(pageURL)}>
+                          onClick={() => handleClick(pageURL)}>
                           {menuTitle}
                         </Button>                    
                   );
@@ -169,28 +159,3 @@ const Header = props => {
 };
 
 export default withRouter(Header);
-/*
-<div className={classes.headerOptions}>
-<Button
-               
- sx={{ my: 2, color: 'white'}}                
-  onClick={() => handleButtonClick("/")}
->
-  CLIMA
-</Button>
-
-<Button
-              
-  sx={{ my: 2, color: 'white'}}  
-  onClick={() => handleButtonClick("/crud")}
->
-  USUARIOS
-</Button>
-
-<Button                             
-  sx={{ my: 2, color: 'white'}}  
-  onClick={btnLogout}
->
-  LOGOUT
-</Button>             
-</div>*/
