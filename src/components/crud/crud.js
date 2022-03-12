@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 
 
 import {makeStyles} from '@material-ui/core/styles';
-import {Box, Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField}  from '@material-ui/core';
+import {Box, Grid ,Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField}  from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-
-
-
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -26,7 +23,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const useStyles = makeStyles((theme) => ({
   modal: {
     position: 'absolute',
-    width: 400,
+    width: 200,
     background: 'linear-gradient(180deg,#4D5DFB,#08C8F6)',   
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -43,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     minWidth: 900
+  },
+  narrowCell: {
+    width: 150
   }
  
 }));
@@ -179,17 +179,20 @@ const Crud = () => {
   }
 
 
-    return (
-        
-      <Box 
-      sx={{      
-         marginTop: 150,          
-         background: 'linear-gradient(180deg,#4D5DFB,#08C8F6)',
-         borderRadius: 15,
-     
-     }}>
-          
-              <TableContainer >
+    return (       
+      
+          <Grid container >
+            <Grid item xs={1} sm={2}>            
+            </Grid>
+            <Grid item xs={10} sm={8}>
+              <Box 
+                  sx={{      
+                    marginTop: 150,          
+                    background: 'linear-gradient(180deg,#4D5DFB,#08C8F6)',
+                    borderRadius: 15,
+                
+                }}>
+                <TableContainer >
                   <Table className={styles.table}>
                       <TableHead >
                           <TableRow  >
@@ -204,21 +207,21 @@ const Crud = () => {
                       <TableBody>
                           {user.map(console=>(
                               <TableRow key={console.id}>
-                              <TableCell>{console.name}</TableCell>
-                              <TableCell>{console.surname}</TableCell>
-                              <TableCell>{console.phone}</TableCell>
-                              <TableCell>{console.msj}</TableCell>
-                              <TableCell>                                
-                                  <Edit className={styles.iconos} onClick={()=>ConsoleSelect(console, 'Editar')}/>               
-                                  &nbsp;&nbsp;&nbsp;
-                                  <Delete  className={styles.iconos} onClick={()=>ConsoleSelect(console, 'Eliminar')}/>
+                                  <TableCell className={styles.narrowCell}>{console.name}</TableCell>
+                                  <TableCell className={styles.narrowCell}>{console.surname}</TableCell>
+                                  <TableCell className={styles.narrowCell}>{console.phone}</TableCell>
+                                  <TableCell className={styles.narrowCell}>{console.msj}</TableCell>
+                                  <TableCell className={styles.narrowCell}>                                
+                                    <Edit className={styles.iconos} onClick={()=>ConsoleSelect(console, 'Editar')}/>               
+                                    &nbsp;&nbsp;&nbsp;
+                                    <Delete  className={styles.iconos} onClick={()=>ConsoleSelect(console, 'Eliminar')}/>
                                   </TableCell>
                               </TableRow>
                           ))}
                       </TableBody>
                   </Table>
               </TableContainer> 
-               
+            </Box>  
 
               <Modal
                 open={modalEditar}
@@ -230,8 +233,14 @@ const Crud = () => {
                 open={modalEliminar}
                 onClose={abrirCerrarModalEliminar}>
                 {bodyEliminar}
-              </Modal> 
-          </Box>
+              </Modal>
+            </Grid>
+    
+            <Grid item xs={1} sm={2}>                                
+             </Grid> 
+              
+          </Grid>
+        
         
   );    
 }

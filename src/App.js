@@ -4,7 +4,7 @@ import { AppRouter } from './routers/AppRouter';
 import { store } from './store/store';
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { green, purple } from '@material-ui/core/colors';
+
 
 
 const  theme = createTheme ({
@@ -17,10 +17,8 @@ const  theme = createTheme ({
                 } 
             
       },
-      typography:{
-            fontFamily: [
-                  'Roboto', 'sans-serif'
-            ]
+      typography: {
+            fontFamily: ['"Montserrat"', 'Open Sans'].join(',')
            }
 })
 
