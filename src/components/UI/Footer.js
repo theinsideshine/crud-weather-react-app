@@ -27,3 +27,5 @@ export const Copyright=() => {
             </Box>  
           );
         }   
+
+    export default Footer;

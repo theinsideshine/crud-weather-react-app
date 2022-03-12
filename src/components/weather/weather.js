@@ -7,58 +7,33 @@ import  TextField  from '@mui/material/TextField';
 import LocationCity from '@mui/icons-material/LocationCity';
 
 import WeatherIcon from './WeatherIcon';
-
 import { arrayIcon} from './iconsArrays';
 
-//import BackImage from './assets/background-pattern.png'
-
-
-
-const useStyles = makeStyles((theme) =>({
-    
-  tempContainer:{
-      
-      paddingTop: '35px',
-     color: '#FFFFFF' 
-    
-  }
-}));
-
-
-    
-
-
+const useStyles = makeStyles((theme) =>({})); 
 
 const Weather = (props) => {
 
-
     const classes = useStyles();
-
         
     const api_key =  '29046abedc6759780d339d28d50c93a2';
     const url_base= 'https://api.openweathermap.org/data/2.5/'; 
 
-    const [city, setCity] = useState("");              // Ciudad a buscar.
-    const [findCity, setFindCity] =  useState(false);  // Busqueda valida en city.      
-    const [weather, setweather] = useState({});   // Datos del clima
-    const [error, setError] = useState(true);        // Datos del clima validos  
-    const [ icon, setIcon ] = useState(1087);        // Iconos del clima, por defecto carga sol/nubo/rayo
-    const [ iconDay, setIconDay ] = useState(0);     // Condicion de dia para iconos del clima 0=noche
+    const [city, setCity] = useState("");             // Ciudad a buscar.
+    const [findCity, setFindCity] =  useState(false); // Busqueda valida en city.      
+    const [weather, setweather] = useState({});       // Datos del clima
+    const [error, setError] = useState(true);         // Datos del clima validos  
+    const [ icon, setIcon ] = useState(1087);         // Iconos del clima, por defecto carga sol/nubo/rayo
+    const [ iconDay, setIconDay ] = useState(0);      // Condicion de dia para iconos del clima 0 = noche
 
-
-    
-       function convertIcon ( icon ) {
-        arrayIcon.forEach(object =>{
-            if(object.iconName === icon){
-                console.log("icon", object.icon);
-                console.log("day", object.iconDay);
-                setIcon(object.icon);
-                setIconDay(object.iconDay);
-            }
-        });
-        console.log(icon);
-       }
-
+    // Convierte el icono de la api en el icono svg
+        function convertIcon ( icon ) {
+            arrayIcon.forEach(object =>{
+                if(object.iconName === icon){
+                    setIcon(object.icon);
+                    setIconDay(object.iconDay);
+                }
+            });
+        }
                   
        useEffect(() => {
 
@@ -69,47 +44,32 @@ const Weather = (props) => {
                 const url = `${url_base}weather?q=${city}&units=metric&lang=sp&APPID=${api_key}`;
         
                 const response = await fetch(url);
-                const data = await response.json(); 
-                convertIcon(data.weather[0].icon);
-                console.log(data.weather[0].icon);              
-                
-            
+                const data = await response.json();                          
         
                 // Detecta si hubo resultados correctos en la consulta
               
                 if(response.status === 200) {
                     setweather(data); // Importante_Primero cargar la data para que no randeriza antes de cambiar a false error y no encuentre data.
-                    setError(false);
-
-                    if (  data.weather[0].icon === '04d'){
-                        setIcon(1009);
-                        setIconDay(1);
-                    } 
-                    if (  data.weather[0].icon === '04n'){
-                        setIcon(1009);
-                        setIconDay(0);
-                    } 
-
-                    
+                    convertIcon(data.weather[0].icon);
+                   // console.log(data.weather[0].icon);  
+                    setError(false);    
                 } else {
                     setError(true); 
                 }
-                setFindCity(false);
                 
+                setFindCity(false);  
+                setCity("");              
             }
         }
 
-    ApiCall();
-  
+    ApiCall();  
     
       },[findCity, city]);                            
         
      
       return (
-           <>
-            
-    
-            <Grid container className={classes.root} >
+           <>   
+            <Grid container >
                 <Grid item xs={1} sm={3}>            
                 </Grid>
     
@@ -149,9 +109,9 @@ const Weather = (props) => {
                                       />
                                   </Box>                                                                                
                              </Box>
-
+ 
                               {error ? (  < >
-                                              
+                                            
                                            </>
                               ):(
                                 <>
@@ -202,10 +162,8 @@ const Weather = (props) => {
                         </Box>                
                 </Grid>
     
-                <Grid item xs={1} sm={3}>  
-                                
-                </Grid> 
-    
+                <Grid item xs={1} sm={3}>                                
+                </Grid>    
                 
             </Grid>
             

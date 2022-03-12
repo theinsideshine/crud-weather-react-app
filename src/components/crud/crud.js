@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 
 
 import {makeStyles} from '@material-ui/core/styles';
-import {Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField}  from '@material-ui/core';
+import {Box, Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField}  from '@material-ui/core';
 import {Edit, Delete} from '@material-ui/icons';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
+
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     position: 'absolute',
     width: 400,
-    backgroundColor: theme.palette.background.paper,
+    background: 'linear-gradient(180deg,#4D5DFB,#08C8F6)',   
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -38,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
   }, 
   inputMaterial:{
     width: '100%'
+  },
+  table: {
+    minWidth: 900
   }
  
 }));
@@ -78,7 +83,22 @@ const useStyles = makeStyles((theme) => ({
       surname: 'Tavolaro Ortiz',
       phone: '15-4545-8978',
       msj: 'Pink'
-    }
+    },
+    {
+      id: 6,
+      name: 'Pablo Oscar',
+      surname: 'Tavolaro Ortiz',
+      phone: '15-4545-8978',
+      msj: 'Pink'
+    },
+    {
+      id: 7,
+      name: 'Anabel Natalia',
+      surname: 'Reta',
+      phone: '15-4571-0008',
+      msj: 'Black'
+    },
+    
 
   ];
 
@@ -161,10 +181,16 @@ const Crud = () => {
 
     return (
         
-          <div className='app2'>
+      <Box 
+      sx={{      
+         marginTop: 150,          
+         background: 'linear-gradient(180deg,#4D5DFB,#08C8F6)',
+         borderRadius: 15,
+     
+     }}>
           
               <TableContainer >
-                  <Table >
+                  <Table className={styles.table}>
                       <TableHead >
                           <TableRow  >
                             <StyledTableCell>Nombre</StyledTableCell>
@@ -191,7 +217,8 @@ const Crud = () => {
                           ))}
                       </TableBody>
                   </Table>
-              </TableContainer>  
+              </TableContainer> 
+               
 
               <Modal
                 open={modalEditar}
@@ -204,7 +231,7 @@ const Crud = () => {
                 onClose={abrirCerrarModalEliminar}>
                 {bodyEliminar}
               </Modal> 
-          </div>
+          </Box>
         
   );    
 }
