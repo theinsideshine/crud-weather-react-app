@@ -55,6 +55,8 @@ const Crud = () => {
   const [modalEliminar, setModalEliminar]=useState(false);
   const [modalEditar, setModalEditar]=useState(false);
   const [user, setUser]= useState([]);
+  const [ userChange, setUserChange] =useState(false);
+
 
 
   
@@ -68,7 +70,7 @@ const Crud = () => {
           
               const url = `${url_base}`;
 
-              const response = await fetchConToken(url,'GET');
+              const response = await fetchConToken(url,0,'GET');
               const data = await response.json();                          
 
               // Detecta si hubo resultados correctos en la consulta
@@ -77,13 +79,14 @@ const Crud = () => {
                   setUser(data);                    
               } else {
                 console.log('error'); 
-              }                 
+              }    
+              setUserChange(false);             
         
       }
 
       ApiCall();  
 
-      },[]);
+      },[userChange]);
    
   const [selectConsole, setSelectConsole]=useState({
       name: '',
@@ -107,7 +110,22 @@ const Crud = () => {
       abrirCerrarModalEditar();
     }
   
-  const peticionDelete=()=>{
+  const peticionDelete= async (id) =>{
+
+        
+     console.log(id);
+     const url = `users/delete/${id}`;
+
+              const response = await fetchConToken(url,0,'DELETE');
+              const data = await response.json();                          
+
+              // Detecta si hubo resultados correctos en la consulta
+            
+              if(response.status === 200) {                  
+                  setUserChange(true);                    
+              } else {
+                console.log('error'); 
+              }  
    
       abrirCerrarModalEliminar();
       }
@@ -134,7 +152,7 @@ const Crud = () => {
     <div className={styles.modal}>
       <p>Estás seguro que deseas eliminar la consola <b>{selectConsole && selectConsole.name}</b> ? </p>
       <div align="right">
-      <Button color="secondary" onClick={()=>peticionDelete()} >Sí</Button>
+      <Button color="secondary" onClick={()=>peticionDelete(selectConsole.id)} >Sí</Button>
         <Button onClick={()=>abrirCerrarModalEliminar()}>No</Button>
 
       </div>

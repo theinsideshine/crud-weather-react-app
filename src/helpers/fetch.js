@@ -22,6 +22,9 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
     const url = `${ baseUrl }/${ endpoint }`;
     const token = localStorage.getItem('token') || '';
     console.log(token);
+    console.log(data);
+    console.log(method);
+
 
     if ( method === 'GET' ) {
         return fetch( url, {
@@ -35,7 +38,7 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
             method,
             headers: {
                 'Content-type': 'application/json',
-                'x-token': token
+                'Authorization':  token,
             },
             body: JSON.stringify( data )
         });
