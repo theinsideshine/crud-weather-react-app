@@ -52,25 +52,17 @@ const useStyles = makeStyles((theme) => ({
 
 const Crud = () => {
   const styles= useStyles();
-  const [modalEliminar, setModalEliminar]=useState(false);
-  const [modalEditar, setModalEditar]=useState(false);
+  const [modalRemove, setmodalRemove]=useState(false);
+  const [modalEdit, setmodalEdit]=useState(false);
   const [user, setUser]= useState([]);
-  const [ userChange, setUserChange] =useState(false);
-
-
-
+  const [ userChange, setUserChange] =useState(false);  
   
-  const url_base= 'users/list'; 
 
         useEffect(() => {
 
-          const ApiCall = async () => {
+          const ApiCall = async () => {    
 
-             
-          
-              const url = `${url_base}`;
-
-              const response = await fetchConToken(url,0,'GET');
+              const response = await fetchConToken('users/list',0,'GET');
               const data = await response.json();                          
 
               // Detecta si hubo resultados correctos en la consulta
@@ -101,76 +93,78 @@ const Crud = () => {
       ...prevState,
       [name]: value
     }))
-    console.log(selectConsole);
+    
   }
 
-  const peticionPut=()=>{
+  const petitionPut= async (selectConsole)=>{    
     
-     // setData(dataNueva);
-      abrirCerrarModalEditar();
+              const response = await fetchConToken('users/update/',selectConsole,'PUT');             
+            
+              if(response.status === 200) {                           
+                  setUserChange(true);                    
+              } else {
+                console.log('error'); 
+              }  
+   
+      openClosemodalEdit();
     }
   
-  const peticionDelete= async (id) =>{
+  const petitionDelete= async (id) =>{        
+     
+     
 
-        
-     console.log(id);
-     const url = `users/delete/${id}`;
-
-              const response = await fetchConToken(url,0,'DELETE');
-              const data = await response.json();                          
-
-              // Detecta si hubo resultados correctos en la consulta
-            
+              const response = await fetchConToken( `users/delete/${id}`,0,'DELETE');
+                          
               if(response.status === 200) {                  
                   setUserChange(true);                    
               } else {
                 console.log('error'); 
               }  
    
-      abrirCerrarModalEliminar();
+      openClosemodalRemove();
       }
 
-      const bodyEditar=(
+      const bodyEdit=(
         <div className={styles.modal}>
           <h3>Editar Consola</h3>
-          <TextField name="nombre" className={styles.inputMaterial} label="Nombre" onChange={handleChange} value={selectConsole && selectConsole.name}/>
+          <TextField name="name" className={styles.inputMaterial} label="Nombre" onChange={handleChange} value={selectConsole && selectConsole.name}/>
           <br />
-          <TextField surname="apellido" className={styles.inputMaterial} label="Apellido" onChange={handleChange} value={selectConsole && selectConsole.surname}/>
+          <TextField name="surname" className={styles.inputMaterial} label="Apellido" onChange={handleChange} value={selectConsole && selectConsole.surname}/>
           <br />
-          <TextField phone="telefono" className={styles.inputMaterial} label="Telefono" onChange={handleChange} value={selectConsole && selectConsole.phone}/>
+          <TextField name="phone" className={styles.inputMaterial} label="Telefono" onChange={handleChange} value={selectConsole && selectConsole.phone}/>
           <br />
           <TextField name="msj" className={styles.inputMaterial} label="Mensaje" onChange={handleChange} value={selectConsole && selectConsole.msj}/>
           <br /><br />
           <div align="right">
-            <Button color="primary" onClick={()=>peticionPut()}>Editar</Button>
-            <Button onClick={()=>abrirCerrarModalEditar()}>Cancelar</Button>
+            <Button color="primary" onClick={()=>petitionPut(selectConsole)}>Editar</Button>
+            <Button onClick={()=>openClosemodalEdit()}>Cancelar</Button>
           </div>
         </div>
       )
  
-  const bodyEliminar=(
+  const bodyRemove=(
     <div className={styles.modal}>
       <p>Estás seguro que deseas eliminar la consola <b>{selectConsole && selectConsole.name}</b> ? </p>
       <div align="right">
-      <Button color="secondary" onClick={()=>peticionDelete(selectConsole.id)} >Sí</Button>
-        <Button onClick={()=>abrirCerrarModalEliminar()}>No</Button>
+      <Button color="secondary" onClick={()=>petitionDelete(selectConsole.id)} >Sí</Button>
+        <Button onClick={()=>openClosemodalRemove()}>No</Button>
 
       </div>
 
     </div>
   )
 
-  const abrirCerrarModalEditar=()=>{
-    setModalEditar(!modalEditar);
+  const openClosemodalEdit=()=>{
+    setmodalEdit(!modalEdit);
   }
 
-  const abrirCerrarModalEliminar=()=>{
-    setModalEliminar(!modalEliminar);
+  const openClosemodalRemove=()=>{
+    setmodalRemove(!modalRemove);
   }
 
   const ConsoleSelect=(console, caso)=>{
     setSelectConsole(console);
-    (caso==='Editar')?abrirCerrarModalEditar():abrirCerrarModalEliminar()
+    (caso==='Editar')?openClosemodalEdit():openClosemodalRemove()
   }
  
 
@@ -221,15 +215,15 @@ const Crud = () => {
             </Box>  
 
               <Modal
-                open={modalEditar}
-                onClose={abrirCerrarModalEditar}>
-                {bodyEditar}
+                open={modalEdit}
+                onClose={openClosemodalEdit}>
+                {bodyEdit}
               </Modal>
 
               <Modal
-                open={modalEliminar}
-                onClose={abrirCerrarModalEliminar}>
-                {bodyEliminar}
+                open={modalRemove}
+                onClose={openClosemodalRemove}>
+                {bodyRemove}
               </Modal>
             </Grid>
     

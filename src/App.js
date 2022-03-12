@@ -32,8 +32,3 @@ export default function App() {
       </ThemeProvider> 
        )
   }
-/*
-typography: {
-            
-            fontFamily: ['"Montserrat"', 'Open Sans'].join(',')
-           }*/

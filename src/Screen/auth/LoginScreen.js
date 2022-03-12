@@ -9,7 +9,7 @@ import { Link  } from 'react-router-dom';
 import { setError, removeError } from '../../action/ui';
 import { ErrorForm } from '../../components/errorForm/errorForm';
 
-import { login } from '../../action/auth'; // forzar auth
+//import { login } from '../../action/auth'; // forzar auth
 import { startLogin } from '../../action/auth'; 
 
 
@@ -46,13 +46,10 @@ const LoginScreen = (  ) => {
 
   const handleLogin = (event) => {
 
-    event.preventDefault();   
-   
-    //console.log( email, password);
+    event.preventDefault();    
+    
 
-    if ( isFormValid () ) {
-    
-    
+    if ( isFormValid () ) {   
       
       dispatch( startLogin ( email , password ));
      /* forzar auth
@@ -63,8 +60,7 @@ const LoginScreen = (  ) => {
  
     localStorage.setItem('uid', email );
     localStorage.setItem('name','jose' );
-    */
-      
+    */     
       
     }
 

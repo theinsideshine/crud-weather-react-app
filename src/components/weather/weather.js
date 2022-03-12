@@ -50,15 +50,14 @@ const Weather = (props) => {
               
                 if(response.status === 200) {
                     setweather(data); // Importante_Primero cargar la data para que no randeriza antes de cambiar a false error y no encuentre data.
-                    convertIcon(data.weather[0].icon);
-                   // console.log(data.weather[0].icon);  
+                    convertIcon(data.weather[0].icon);                   
                     setError(false);    
                 } else {
                     setError(true); 
                 }
                 
                 setFindCity(false);  
-                setCity("");              
+                             
             }
         }
 
