@@ -8,6 +8,8 @@ import LocationCity from '@mui/icons-material/LocationCity';
 
 import WeatherIcon from './WeatherIcon';
 
+import { arrayIcon} from './iconsArrays';
+
 //import BackImage from './assets/background-pattern.png'
 
 
@@ -21,6 +23,9 @@ const useStyles = makeStyles((theme) =>({
     
   }
 }));
+
+
+    
 
 
 
@@ -37,12 +42,22 @@ const Weather = (props) => {
     const [findCity, setFindCity] =  useState(false);  // Busqueda valida en city.      
     const [weather, setweather] = useState({});   // Datos del clima
     const [error, setError] = useState(true);        // Datos del clima validos  
-    const [ icon, setIcon ] = useState(1135);        // Iconos del clima
-    const [ iconDay, setIconDay ] = useState(1);     // Condicion de dia para iconos del clima
+    const [ icon, setIcon ] = useState(1087);        // Iconos del clima, por defecto carga sol/nubo/rayo
+    const [ iconDay, setIconDay ] = useState(0);     // Condicion de dia para iconos del clima 0=noche
 
 
     
-       
+       function convertIcon ( icon ) {
+        arrayIcon.forEach(object =>{
+            if(object.iconName === icon){
+                console.log("icon", object.icon);
+                console.log("day", object.iconDay);
+                setIcon(object.icon);
+                setIconDay(object.iconDay);
+            }
+        });
+        console.log(icon);
+       }
 
                   
        useEffect(() => {
@@ -51,10 +66,11 @@ const Weather = (props) => {
         
                 if (findCity){
             
-                const url = `${url_base}weather?q=${city}&units=metric&APPID=${api_key}`;
+                const url = `${url_base}weather?q=${city}&units=metric&lang=sp&APPID=${api_key}`;
         
                 const response = await fetch(url);
                 const data = await response.json(); 
+                convertIcon(data.weather[0].icon);
                 console.log(data.weather[0].icon);              
                 
             
@@ -64,6 +80,7 @@ const Weather = (props) => {
                 if(response.status === 200) {
                     setweather(data); // Importante_Primero cargar la data para que no randeriza antes de cambiar a false error y no encuentre data.
                     setError(false);
+
                     if (  data.weather[0].icon === '04d'){
                         setIcon(1009);
                         setIconDay(1);
