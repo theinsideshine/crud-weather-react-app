@@ -2,6 +2,9 @@
 import { types } from '../types/types';
 import { finishLoading, startLoading } from './ui';
 import { fetchSinToken } from '../helpers/fetch';
+import { setError, removeError } from './ui';
+
+
         /*
         *    Se encarga de registrase en el servidor
         */
@@ -70,6 +73,7 @@ export const startLogin = ( email, password)  => {
 
                 console.log('Login error');
                  dispatch (finishLoading());
+                 dispatch ( setError('Error de loggin'));
 
                 }
 

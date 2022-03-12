@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link  } from 'react-router-dom';
 
 
-import { login } from '../../action/auth'; // forzar auth
 import { setError, removeError } from '../../action/ui';
 import { ErrorForm } from '../../components/errorForm/errorForm';
+
+import { login } from '../../action/auth'; // forzar auth
+import { startLogin } from '../../action/auth'; 
 
 
 
@@ -52,7 +54,8 @@ const LoginScreen = (  ) => {
     
     
       
-     // dispatch( startLogin ( email , password )); forzar auth
+      dispatch( startLogin ( email , password ));
+     /* forzar auth
      dispatch( login({
       uid :email,
       name: 'jose'
@@ -60,7 +63,7 @@ const LoginScreen = (  ) => {
  
     localStorage.setItem('uid', email );
     localStorage.setItem('name','jose' );
-    
+    */
       
       
     }

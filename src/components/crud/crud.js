@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 import {makeStyles} from '@material-ui/core/styles';
@@ -6,6 +6,8 @@ import {Box, Grid ,Table, TableContainer, TableHead, TableCell, TableBody, Table
 import {Edit, Delete} from '@material-ui/icons';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
+
+import { fetchConToken } from '../../helpers/fetch';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -16,8 +18,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   }
 }));
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,65 +48,42 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-  const user =[
-    {
-      id: 1,
-      name: 'Pablo Oscar',
-      surname: 'Tavolaro Ortiz',
-      phone: '15-4545-8978',
-      msj: 'Pink'
-    },
-    {
-      id: 2,
-      name: 'Anabel Natalia',
-      surname: 'Reta',
-      phone: '15-4571-0008',
-      msj: 'Black'
-    },
-    {
-      id: 3,
-      name: 'Pablo Oscar',
-      surname: 'Tavolaro Ortiz',
-      phone: '15-4545-8978',
-      msj: 'Pink'
-    },
-    {
-      id: 4,
-      name: 'Anabel Natalia',
-      surname: 'Reta',
-      phone: '15-4571-0008',
-      msj: 'Black'
-    },
-    {
-      id: 5,
-      name: 'Pablo Oscar',
-      surname: 'Tavolaro Ortiz',
-      phone: '15-4545-8978',
-      msj: 'Pink'
-    },
-    {
-      id: 6,
-      name: 'Pablo Oscar',
-      surname: 'Tavolaro Ortiz',
-      phone: '15-4545-8978',
-      msj: 'Pink'
-    },
-    {
-      id: 7,
-      name: 'Anabel Natalia',
-      surname: 'Reta',
-      phone: '15-4571-0008',
-      msj: 'Black'
-    },
-    
-
-  ];
+ 
 
 const Crud = () => {
   const styles= useStyles();
   const [modalEliminar, setModalEliminar]=useState(false);
   const [modalEditar, setModalEditar]=useState(false);
+  const [user, setUser]= useState([]);
 
+
+  
+  const url_base= 'users/list'; 
+
+        useEffect(() => {
+
+          const ApiCall = async () => {
+
+             
+          
+              const url = `${url_base}`;
+
+              const response = await fetchConToken(url,'GET');
+              const data = await response.json();                          
+
+              // Detecta si hubo resultados correctos en la consulta
+            
+              if(response.status === 200) {                  
+                  setUser(data);                    
+              } else {
+                console.log('error'); 
+              }                 
+        
+      }
+
+      ApiCall();  
+
+      },[]);
    
   const [selectConsole, setSelectConsole]=useState({
       name: '',
@@ -177,21 +154,23 @@ const Crud = () => {
     setSelectConsole(console);
     (caso==='Editar')?abrirCerrarModalEditar():abrirCerrarModalEliminar()
   }
-
+ 
 
     return (       
       
           <Grid container >
-            <Grid item xs={1} sm={2}>            
+            <Grid item xs={1} sm={2}>  
+                         
             </Grid>
-            <Grid item xs={10} sm={8}>
+            <Grid item xs={10} sm={8}>            
+            
               <Box 
                   sx={{      
                     marginTop: 150,          
                     background: 'linear-gradient(180deg,#4D5DFB,#08C8F6)',
                     borderRadius: 15,
                 
-                }}>
+                }}>                  
                 <TableContainer >
                   <Table className={styles.table}>
                       <TableHead >

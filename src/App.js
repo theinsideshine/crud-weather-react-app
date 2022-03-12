@@ -18,7 +18,7 @@ const  theme = createTheme ({
             
       },
       typography: {
-            fontFamily: ['"Montserrat"', 'Open Sans'].join(',')
+            fontFamily: ['"Roboto"', 'sans-serif'].join(',')
            }
 })
 
@@ -32,3 +32,8 @@ export default function App() {
       </ThemeProvider> 
        )
   }
+/*
+typography: {
+            
+            fontFamily: ['"Montserrat"', 'Open Sans'].join(',')
+           }*/
