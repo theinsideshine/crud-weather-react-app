@@ -60,9 +60,7 @@ const   Register= () => {
     }
   }
 
-    const isFormValid = () => {
-
-     
+    const isFormValid = () => {    
       
      
       if ( !validator.isEmail ( email) ){

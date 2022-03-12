@@ -87,6 +87,7 @@ const Header = props => {
        <Container maxWidth="xl"> 
       <AppBar position="fixed" style={{ background: '#FFFFFF'}}>
         <Toolbar >
+        
           <Box
               component="img"
               sx={{
@@ -95,6 +96,7 @@ const Header = props => {
               alt="Your logo."
               src={Logo}
               />
+             
 
           {isMobile ? (
             <>
@@ -149,8 +151,12 @@ const Header = props => {
                   );
                 })}            
             </div>
-          )}         
+          )} 
+            
+
         </Toolbar>
+
+        
        
       </AppBar>
       </Container>

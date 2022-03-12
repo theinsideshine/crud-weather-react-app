@@ -11,8 +11,7 @@ import ImagePattern from '../../images/background-pattern.png';
 export const CrudScreen = () => {
   
   return (
-    <Paper style={{ backgroundImage: `url(${ImagePattern})`}}
-    >  
+    <Paper style={{ backgroundImage: `url(${ImagePattern})`}}>  
           <Header/>
           <Crud/>
           <Footer/>      

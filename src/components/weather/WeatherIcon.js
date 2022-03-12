@@ -1,5 +1,4 @@
 import React from 'react';
-//import '../../styles/CurrentForecast.css';
 import day from './day-sprites.svg';
 import night from './night-sprites.svg';
 

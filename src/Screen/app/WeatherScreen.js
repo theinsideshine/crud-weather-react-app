@@ -11,9 +11,9 @@ export const WeatherScreen = () => {
 
   return (
     <Paper style={{ backgroundImage: `url(${ImagePattern})`}}>
-      <Header/>
-      <Weather/>
-      <Footer/>
+        <Header/>
+        <Weather/>
+        <Footer/>
     </Paper>
   )
 };

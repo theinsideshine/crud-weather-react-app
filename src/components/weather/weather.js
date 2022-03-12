@@ -7,7 +7,7 @@ import  TextField  from '@mui/material/TextField';
 import LocationCity from '@mui/icons-material/LocationCity';
 
 import WeatherIcon from './WeatherIcon';
-import { arrayIcon} from './iconsArrays';
+import { arrayIcon } from './iconsArrays';
 
 const useStyles = makeStyles((theme) =>({})); 
 
