@@ -36,5 +36,12 @@ crud nokia9
 crud nokia9 table scroll
 ![](images/crud_nokia9_1.gif)
 
+alert message ok
+![](images/alert_ok.gif)
+
+alert message error
+![](images/alert_error.gif)
+
+
 
 

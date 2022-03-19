@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import  Swal from 'sweetalert2';
+
 
 import {makeStyles} from '@material-ui/core/styles';
 import {Box, Grid ,Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, Button, TextField}  from '@material-ui/core';
@@ -7,7 +9,7 @@ import {Edit, Delete} from '@material-ui/icons';
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 
-import { fetchConToken } from '../../helpers/fetch';
+import { fetchWithToken } from '../../helpers/fetch';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -62,15 +64,20 @@ const Crud = () => {
 
           const ApiCall = async () => {    
 
-              const response = await fetchConToken('users/list',0,'GET');
-              const data = await response.json();                          
+              const response = await fetchWithToken('users/list',0,'GET');
+              const body = await response.json();                          
 
               // Detecta si hubo resultados correctos en la consulta
             
               if(response.status === 200) {                  
-                  setUser(data);                    
+                  setUser(body);                    
               } else {
-                console.log('error'); 
+                console.log();  // Incosistencia en los msj de error hay que reforma la devolucion de public List<Users> getUsers en el back
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Token error'                       
+                  });
               }    
               setUserChange(false);             
         
@@ -98,12 +105,20 @@ const Crud = () => {
 
   const petitionPut= async (selectConsole)=>{    
     
-              const response = await fetchConToken('users/update/',selectConsole,'PUT');             
-            
-              if(response.status === 200) {                           
+              const response = await fetchWithToken('users/update/',selectConsole,'PUT');             
+              const body = await response.json(); 
+
+              if(response.status === 200) {  
+                Swal.fire(body.message);  
+                console.log(body.message);                       
                   setUserChange(true);                    
               } else {
-                console.log('error'); 
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: body.message                       
+                  });
+                console.log(body.message); 
               }  
    
       openClosemodalEdit();
@@ -113,12 +128,18 @@ const Crud = () => {
      
      
 
-              const response = await fetchConToken( `users/delete/${id}`,0,'DELETE');
+              const response = await fetchWithToken( `users/delete/${id}`,0,'DELETE');
+              const body = await response.json();
                           
               if(response.status === 200) {                  
                   setUserChange(true);                    
               } else {
-                console.log('error'); 
+                console.log(body.message);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: body.message                       
+                  }); 
               }  
    
       openClosemodalRemove();

@@ -1,6 +1,6 @@
 const baseUrl = process.env.REACT_APP_API_URL;
 
-const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
+const fetchWithoutToken = ( endpoint, data, method = 'GET' ) => {
 
     const url = `${ baseUrl }/${ endpoint }`;
 
@@ -17,7 +17,7 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
     }
 }
 
-const fetchConToken = ( endpoint, data, method = 'GET' ) => {
+const fetchWithToken = ( endpoint, data, method = 'GET' ) => {
 
     const url = `${ baseUrl }/${ endpoint }`;
     const token = localStorage.getItem('token') || '';
@@ -48,6 +48,6 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
 
 
 export {
-    fetchSinToken,
-    fetchConToken
+    fetchWithoutToken,
+    fetchWithToken
 }

@@ -179,12 +179,3 @@ const Weather = (props) => {
 
 export default Weather;
 
-
-//className={classes.text}
-//sx={{ input: { color: 'white' } }}
-
-/*
-<WeatherIcon  code={1000} isDay={1}
-                                                      color={{fill: '#000'}}>
-                                         </WeatherIcon>*/
-                                        // weather.weather[0].icon
