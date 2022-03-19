@@ -31,10 +31,10 @@ crud edit
 ![](images/crud_edit.gif)
 
 crud nokia9
-![](images/crud_nokia2.gif)
+![](images/crud_nokia9_2.gif)
 
 crud nokia9 table scroll
-![](images/crud_nokia1.gif)
+![](images/crud_nokia9_1.gif)
 
 
 
