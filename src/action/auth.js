@@ -19,9 +19,10 @@ export const startRegister = ( email, password, name, surname ) =>  {
                 //console.log (email, password);
                 dispatch (startLoading());    // Control de loadind del login
 
-                const response = await fetchWithoutToken( '/users/register', { email, password,name,surname,phone,msj }, 'POST' );
+                const response = await fetchWithoutToken( 'users/register', { email, password,name,surname,phone,msj }, 'POST' );
                 const body = await response.json();
-               // console.log (body);
+                console.log (body);
+               
 
                 if (body.result === 'OK') {
 
@@ -37,7 +38,6 @@ export const startRegister = ( email, password, name, surname ) =>  {
                         title: 'Oops...',
                         text: body.message                       
                         });
-                console.log(body.message);
                  dispatch (finishLoading());
 
                 }
@@ -56,9 +56,9 @@ export const startLogin = ( email, password)  => {
                 //console.log (email, password);
                 dispatch (startLoading());    // Control de loadind del login
 
-                const response = await fetchWithoutToken( '/login', { email, password }, 'POST' );
+                const response = await fetchWithoutToken( 'login', { email, password }, 'POST' );
                 const body = await response.json();
-               // console.log (body);
+                console.log (body);
 
                 if (body.result === 'OK') {
 

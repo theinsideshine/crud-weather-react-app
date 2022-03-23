@@ -8,6 +8,7 @@ const fetchWithoutToken = ( endpoint, data, method = 'GET' ) => {
         return fetch( url );
     } else {
         return fetch( url, {
+            
             method,
             headers: {
                 'Content-type': 'application/json'
@@ -15,7 +16,9 @@ const fetchWithoutToken = ( endpoint, data, method = 'GET' ) => {
             body: JSON.stringify( data )
         });
     }
+    
 }
+
 
 const fetchWithToken = ( endpoint, data, method = 'GET' ) => {
 
@@ -49,5 +52,7 @@ const fetchWithToken = ( endpoint, data, method = 'GET' ) => {
 
 export {
     fetchWithoutToken,
-    fetchWithToken
+    fetchWithToken,
+   
 }
+
