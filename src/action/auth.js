@@ -38,6 +38,7 @@ export const startRegister = ( email, password, name, surname ) =>  {
                         title: 'Oops...',
                         text: body.message                       
                         });
+                console.log(body.message);
                  dispatch (finishLoading());
 
                 }
