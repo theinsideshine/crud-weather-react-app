@@ -45,6 +45,7 @@ alert message error
 firebase deploy
 ![](images/firebase_deploy.gif)
 
+usage example video
 [![usage example](images/video.gif)](https://youtu.be/cpZJHLjwSWA) 
 
 
