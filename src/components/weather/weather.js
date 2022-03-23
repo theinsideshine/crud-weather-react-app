@@ -76,7 +76,7 @@ const Weather = (props) => {
                         <Box 
                              sx={{      
                                 marginTop: 150,          
-                                height: 500,  
+                                height: 570,  
                                 background: 'linear-gradient(180deg,#4D5DFB,#08C8F6)',
                                 borderRadius: 15,
                             
@@ -125,14 +125,14 @@ const Weather = (props) => {
                              <br></br>
                              <br></br>
                             <Grid container spacing={2}>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} sm={6}>
 
                                          <WeatherIcon  code={icon} isDay={iconDay}
                                                       color={{fill: '#000'}}>
                                          </WeatherIcon>                                 
                                 </Grid>
     
-                                <Grid item xs={6} >
+                                <Grid item xs={12} sm={6} >
                                     <Typography 
                                              color='textPrimary'
                                              variant='h2'
