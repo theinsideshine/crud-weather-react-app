@@ -15,6 +15,7 @@ import { WeatherScreen }  from '../Screen/app/WeatherScreen';
 import { CrudScreen }  from '../Screen/app/CrudScreen';
 
 import { login } from '../action/auth';
+import { ver } from '../version';
 
 export const AppRouter = () => {
    
@@ -24,6 +25,7 @@ export const AppRouter = () => {
 
     useEffect ( () => {
      
+        console.log(ver);
         //!!uid si u string es nulo 
 
         if (!!uid){
@@ -34,7 +36,7 @@ export const AppRouter = () => {
                 console.log('No esta logeado');
             }else {
 
-                // Hay que modificar el back para que soporte re-autenticacion asi puede logearse
+                // You have to modify the back to support re-authentication so you can log in.
               dispatch (login ( localStorage.getItem('uid') ,
               localStorage.getItem('name'),
               localStorage.getItem('token')));  

@@ -9,7 +9,7 @@ const phone= '';
 const msj='';
 
         /*
-        *    Se encarga de registrase en el servidor
+        *   It is responsible for registering on the server
         */
 
 export const startRegister = ( email, password, name, surname ) =>  {
@@ -17,7 +17,7 @@ export const startRegister = ( email, password, name, surname ) =>  {
         return async( dispatch ) => {     
 
                 //console.log (email, password);
-                dispatch (startLoading());    // Control de loadind del login
+                dispatch (startLoading());    // Register loading control
 
                 const response = await fetchWithoutToken( 'users/register', { email, password,name,surname,phone,msj }, 'POST' );
                 const body = await response.json();
@@ -30,7 +30,7 @@ export const startRegister = ( email, password, name, surname ) =>  {
                  Swal.fire(body.message);
                  console.log(body.message);
                         
-               // Hay que modificar el back para que soporte re-autenticacion asi puede logearse
+               
 
                 }else {
                 Swal.fire({
@@ -46,7 +46,7 @@ export const startRegister = ( email, password, name, surname ) =>  {
 }
 
 /*
-*    Se encarga de loggearse en el servidor, 
+*    It is responsible for logging on the server
 */
 
 export const startLogin = ( email, password)  => {
@@ -54,7 +54,7 @@ export const startLogin = ( email, password)  => {
         return async( dispatch ) => {     
 
                 //console.log (email, password);
-                dispatch (startLoading());    // Control de loadind del login
+                dispatch (startLoading());    // Register loading control
 
                 const response = await fetchWithoutToken( 'login', { email, password }, 'POST' );
                 const body = await response.json();
@@ -66,7 +66,7 @@ export const startLogin = ( email, password)  => {
                  Swal.fire(body.message);
                  console.log(body.message);
 
-                 // Hay que modificar el back para que soporte re-autenticacion 
+                 // You have to modify the back to support re-authentication 
 
                 localStorage.setItem('token', body.token );
                 localStorage.setItem('token-init-date', new Date().getTime() ) ; 

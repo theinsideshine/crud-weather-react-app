@@ -67,12 +67,12 @@ const Crud = () => {
               const response = await fetchWithToken('users/list',0,'GET');
               const body = await response.json();                          
 
-              // Detecta si hubo resultados correctos en la consulta
+             
             
               if(response.status === 200) {                  
                   setUser(body);                    
               } else {
-                console.log();  // Incosistencia en los msj de error hay que reforma la devolucion de public List<Users> getUsers en el back
+                console.log();  //Inconsistency in the error messages, it is necessary to reform the return of public List<Users> getUsers in the back
                 Swal.fire({
                   icon: 'error',
                   title: 'Oops...',
@@ -108,7 +108,8 @@ const Crud = () => {
               const response = await fetchWithToken('users/update/',selectConsole,'PUT');             
               const body = await response.json(); 
 
-              if(response.status === 200) {  
+              if(response.status === 200) {                 
+
                 Swal.fire(body.message);  
                 console.log(body.message);                       
                   setUserChange(true);                    
@@ -131,7 +132,9 @@ const Crud = () => {
               const response = await fetchWithToken( `users/delete/${id}`,0,'DELETE');
               const body = await response.json();
                           
-              if(response.status === 200) {                  
+              if(response.status === 200) {   
+                Swal.fire(body.message);
+                console.log(body.message);               
                   setUserChange(true);                    
               } else {
                 console.log(body.message);

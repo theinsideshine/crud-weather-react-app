@@ -18,14 +18,14 @@ const Weather = (props) => {
     const api_key =  '29046abedc6759780d339d28d50c93a2';
     const url_base= 'https://api.openweathermap.org/data/2.5/'; 
 
-    const [city, setCity] = useState("");             // Ciudad a buscar.
-    const [findCity, setFindCity] =  useState(false); // Busqueda valida en city.      
-    const [weather, setweather] = useState({});       // Datos del clima
-    const [error, setError] = useState(true);         // Datos del clima validos  
-    const [ icon, setIcon ] = useState(1087);         // Iconos del clima, por defecto carga sol/nubo/rayo
-    const [ iconDay, setIconDay ] = useState(0);      // Condicion de dia para iconos del clima 0 = noche
+    const [city, setCity] = useState("");             // City to search.
+    const [findCity, setFindCity] =  useState(false); // Valid search in city.      
+    const [weather, setweather] = useState({});       // Weather data.
+    const [error, setError] = useState(true);         // Valid weather data. 
+    const [ icon, setIcon ] = useState(1087);         // Weather icons, default loads sun/cloud/lightning.
+    const [ iconDay, setIconDay ] = useState(0);      // Day condition for weather icons 0 = night.
 
-    // Convierte el icono de la api en el icono svg
+    // Convert api icon to svg icon
         function convertIcon ( icon ) {
             arrayIcon.forEach(object =>{
                 if(object.iconName === icon){
@@ -46,10 +46,10 @@ const Weather = (props) => {
                 const response = await fetch(url);
                 const data = await response.json();                          
         
-                // Detecta si hubo resultados correctos en la consulta
+               
               
                 if(response.status === 200) {
-                    setweather(data); // Importante_Primero cargar la data para que no randeriza antes de cambiar a false error y no encuentre data.
+                    setweather(data); // Important: First load the data so that it does not render before changing to false error and not finding data.
                     convertIcon(data.weather[0].icon);                   
                     setError(false);    
                 } else {
@@ -101,7 +101,7 @@ const Weather = (props) => {
                                         onChange={(e) => setCity(e.target.value)}
                                         onKeyDown={(e) =>{
                                             if(e.key === 'Enter'){                           
-                                                setFindCity(true); // Hay una busqueda valida.
+                                                setFindCity(true); // There is a valid search.
                                                 e.preventDefault()
                                             }
                                         }}
