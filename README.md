@@ -42,6 +42,11 @@ alert message ok
 alert message error
 ![](images/alert_error.gif)
 
+firebase deploy
+![](images/firebase_deploy.gif)
+
+[![usage example](images/video.gif.gif)](https://youtu.be/cpZJHLjwSWA) 
+
 
 
 

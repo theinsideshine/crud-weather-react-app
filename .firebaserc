@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "react-crud-weather"
-  }
+    "default": "react-weathercrud",
+    "reactProyect": "react-weathercrud"
+  },
+  "targets": {}
 }

@@ -1,1 +1,1 @@
-export  const ver='react-crud-weather-version 1.0.00';
+export  const ver='react-crud-weather-version 1.0.01';
